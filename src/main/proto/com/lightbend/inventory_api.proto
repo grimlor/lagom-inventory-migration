@@ -1,0 +1,41 @@
+// This is the public API offered by your entity.
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+package com.lightbend;
+
+option java_outer_classname = "InventoryApi";
+
+message GetInventory {
+    string product_id = 1 [(akkaserverless.field).entity_key = true];
+}
+
+message AddInventory {
+    string product_id = 1 [(akkaserverless.field).entity_key = true];
+    int32 count = 2;
+}
+
+message CurrentInventory {
+    int32 count = 1;
+}
+
+service InventoryService {
+    option (akkaserverless.service) = {
+        type : SERVICE_TYPE_ENTITY
+        component : "com.lightbend.domain.Product"
+    };
+
+    rpc Get(GetInventory) returns (CurrentInventory) {
+        option (google.api.http) = {
+            get: "/inventory/{product_id}"
+        };
+    };
+    rpc Add(AddInventory) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/inventory/{product_id}"
+        };
+    };
+}

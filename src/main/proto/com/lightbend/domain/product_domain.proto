@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.lightbend.domain;
+
+import "akkaserverless/annotations.proto";
+
+option java_outer_classname = "ProductDomain";
+
+option (akkaserverless.file).value_entity = {
+    name: "Product"
+    entity_type: "product"
+    state: "ProductState"
+};
+
+message ProductState {
+    string product_id = 1;
+    int32 count = 2;
+}
