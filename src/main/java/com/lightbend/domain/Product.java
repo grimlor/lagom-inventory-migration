@@ -20,16 +20,25 @@ public class Product extends AbstractProduct {
 
   @Override
   public ProductDomain.ProductState emptyState() {
-    throw new UnsupportedOperationException("Not implemented yet, replace with your empty entity state");
+    return ProductDomain.ProductState.newBuilder()
+            .setProductId(this.entityId)
+            .setCount(0)
+            .build();
   }
 
   @Override
   public Effect<InventoryApi.CurrentInventory> get(ProductDomain.ProductState currentState, InventoryApi.GetInventory getInventory) {
-    return effects().error("The command handler for `Get` is not implemented, yet");
+    return effects().reply(
+            InventoryApi.CurrentInventory.newBuilder()
+                    .setCount(currentState.getCount())
+                    .build());
   }
 
   @Override
   public Effect<Empty> add(ProductDomain.ProductState currentState, InventoryApi.AddInventory addInventory) {
-    return effects().error("The command handler for `Add` is not implemented, yet");
+    var newState = currentState.toBuilder()
+            .setCount(currentState.getCount() + addInventory.getCount())
+            .build();
+    return effects().updateState(newState).thenReply(Empty.getDefaultInstance());
   }
 }

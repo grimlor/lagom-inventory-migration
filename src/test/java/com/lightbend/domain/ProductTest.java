@@ -1,11 +1,11 @@
 package com.lightbend.domain;
 
 import com.akkaserverless.javasdk.testkit.ValueEntityResult;
-import com.akkaserverless.javasdk.valueentity.ValueEntity;
 import com.google.protobuf.Empty;
 import com.lightbend.InventoryApi;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 // This class was initially generated based on the .proto definition by Akka Serverless tooling.
@@ -31,14 +31,34 @@ public class ProductTest {
   @Test
   public void getTest() {
     ProductTestKit testKit = ProductTestKit.of(Product::new);
-    // ValueEntityResult<CurrentInventory> result = testKit.get(GetInventory.newBuilder()...build());
+    ValueEntityResult<InventoryApi.CurrentInventory> result = testKit.get(
+            InventoryApi.GetInventory.newBuilder()
+                    .setProductId("foo")
+                    .build());
+
+    InventoryApi.CurrentInventory response = result.getReply();
+    assertThat(response, is(InventoryApi.CurrentInventory.newBuilder().setCount(0).build()));
   }
 
 
   @Test
   public void addTest() {
     ProductTestKit testKit = ProductTestKit.of(Product::new);
-    // ValueEntityResult<Empty> result = testKit.add(AddInventory.newBuilder()...build());
+    ValueEntityResult<Empty> result = testKit.add(
+            InventoryApi.AddInventory.newBuilder()
+                    .setProductId("testkit-entity-id")
+                    .setCount(3)
+                    .build());
+
+
+    var response = result.getReply();
+    assertThat(response, is(Empty.getDefaultInstance()));
+
+    var expectedState = ProductDomain.ProductState.newBuilder()
+            .setProductId("testkit-entity-id")
+            .setCount(3)
+            .build();
+    assertThat(testKit.getState(), is(expectedState));
   }
 
 }

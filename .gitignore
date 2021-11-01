@@ -38,4 +38,5 @@ Thumbs.db
 
 # IntelliJ Idea files #
 #######################
+/.idea/
 /target/
