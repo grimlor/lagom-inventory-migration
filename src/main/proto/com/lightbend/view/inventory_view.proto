@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "com/lightbend/domain/product_domain.proto";
+import "akkaserverless/annotations.proto";
+import "google/api/annotations.proto";
+
+package com.lightbend.view;
+
+service FullInventory {
+  option (akkaserverless.service) = {
+    type: SERVICE_TYPE_VIEW
+  };
+
+  rpc UpdateInventory(domain.ProductState) returns (domain.ProductState) {
+    option (akkaserverless.method).eventing.in = {
+      value_entity: "product"
+    };
+    option (akkaserverless.method).view.update = {
+      table: "product_inventory"
+    };
+  }
+
+  rpc GetInventory(google.protobuf.Empty) returns (stream domain.ProductState) {
+    option (google.api.http) = {
+      get: "/views/getinventory"
+    };
+    option (akkaserverless.method).view.query = {
+      query: "SELECT * FROM product_inventory"
+    };
+  }
+}

@@ -2,6 +2,7 @@ package com.lightbend;
 
 import com.akkaserverless.javasdk.AkkaServerless;
 import com.lightbend.domain.Product;
+import com.lightbend.view.FullInventoryView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +21,11 @@ public final class Inventory {
     // If you prefer, you may remove this and manually register these components in a
     // `new AkkaServerless()` instance.
     return AkkaServerlessFactory.withComponents(
-      Product::new);
+            Product::new,
+            FullInventoryView::new);
   }
 
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     LOG.info("starting the Akka Serverless service");
     createAkkaServerless().start();
   }
