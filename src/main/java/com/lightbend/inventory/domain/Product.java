@@ -1,8 +1,8 @@
-package com.lightbend.domain;
+package com.lightbend.inventory.domain;
 
 import com.akkaserverless.javasdk.valueentity.ValueEntityContext;
 import com.google.protobuf.Empty;
-import com.lightbend.InventoryApi;
+import com.lightbend.inventory.InventoryApi;
 
 // This class was initially generated based on the .proto definition by Akka Serverless tooling.
 //

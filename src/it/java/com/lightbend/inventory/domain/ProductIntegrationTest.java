@@ -1,10 +1,9 @@
-package com.lightbend.domain;
+package com.lightbend.inventory.domain;
 
 import com.akkaserverless.javasdk.testkit.junit.AkkaServerlessTestKitResource;
-import com.google.protobuf.Empty;
-import com.lightbend.Inventory;
-import com.lightbend.InventoryApi;
-import com.lightbend.InventoryService;
+import com.lightbend.inventory.Inventory;
+import com.lightbend.inventory.InventoryApi;
+import com.lightbend.inventory.InventoryService;
 import org.junit.ClassRule;
 import org.junit.Test;
 

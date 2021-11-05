@@ -1,8 +1,8 @@
-package com.lightbend.domain;
+package com.lightbend.inventory.domain;
 
 import com.akkaserverless.javasdk.testkit.ValueEntityResult;
 import com.google.protobuf.Empty;
-import com.lightbend.InventoryApi;
+import com.lightbend.inventory.InventoryApi;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;

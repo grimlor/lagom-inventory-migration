@@ -1,11 +1,11 @@
 syntax = "proto3";
 
 import "google/protobuf/empty.proto";
-import "com/lightbend/domain/product_domain.proto";
+import "com/lightbend/inventory/domain/product_domain.proto";
 import "akkaserverless/annotations.proto";
 import "google/api/annotations.proto";
 
-package com.lightbend.view;
+package com.lightbend.inventory.view;
 
 service FullInventory {
   option (akkaserverless.service) = {
