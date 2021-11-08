@@ -2,7 +2,7 @@ package com.lightbend.inventory;
 
 import com.akkaserverless.javasdk.AkkaServerless;
 import com.lightbend.inventory.domain.Product;
-import com.lightbend.inventory.view.FullInventoryView;
+import com.lightbend.inventory.views.FullInventoryView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

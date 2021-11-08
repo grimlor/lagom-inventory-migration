@@ -1,4 +1,4 @@
-package com.lightbend.inventory.view;
+package com.lightbend.inventory.views;
 
 import com.akkaserverless.javasdk.view.ViewContext;
 

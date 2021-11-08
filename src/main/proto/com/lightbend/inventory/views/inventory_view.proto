@@ -5,7 +5,7 @@ import "com/lightbend/inventory/domain/product_domain.proto";
 import "akkaserverless/annotations.proto";
 import "google/api/annotations.proto";
 
-package com.lightbend.inventory.view;
+package com.lightbend.inventory.views;
 
 service FullInventory {
   option (akkaserverless.service) = {
