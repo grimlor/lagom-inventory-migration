@@ -42,14 +42,14 @@ mvn compile exec:exec
 With both the proxy and your application running, any defined endpoints should be available at `http://localhost:9000`. In addition to the defined gRPC interface, each method has a corresponding HTTP endpoint. Unless configured otherwise (see [Transcoding HTTP](https://developer.lightbend.com/docs/akka-serverless/java/proto.html#_transcoding_http)), this endpoint accepts POST requests at the path `/[package].[entity name]/[method]`. For example, using `curl`:
 
 ```
-> curl -XPOST -H "Content-Type: application/json" localhost:9000/com.lightbend.InventoryService/GetInventory -d '{"productId": "foo"}'
+> curl -XPOST -H "Content-Type: application/json" localhost:9000/com.lightbend.inventory.Inventory/GetInventory -d '{"productId": "foo"}'
 The command handler for `GetInventory` is not implemented, yet
 ```
 
 For example, using [`grpcurl`](https://github.com/fullstorydev/grpcurl):
 
 ```shell
-> grpcurl -plaintext -d '{"productId": "foo"}' localhost:9000 com.lightbend.InventoryService/GetInventory 
+> grpcurl -plaintext -d '{"productId": "foo"}' localhost:9000 com.lightbend.inventory.Inventory/GetInventory 
 ERROR:
   Code: Unknown
   Message: The command handler for `GetInventory` is not implemented, yet
